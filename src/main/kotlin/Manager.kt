@@ -1,13 +1,11 @@
 import data.Command
 
 object Manager {
-    private var command: String = ""
     private var end = false
     fun getCommand() {
         while (!end) {
             println("Введите команду:")
-            command = readln()
-            when (command) {
+            when (readln()) {
                 Command.START.commandText -> printHelloMessage()
                 Command.HELP.commandText -> printHelpMessage()
                 Command.END.commandText -> endProgram()
