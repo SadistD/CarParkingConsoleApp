@@ -5,4 +5,8 @@ data class Car(
     val color: String,
     val registrationNumber: String,
     val owner: Owner
-)
+) {
+    override fun toString(): String {
+        return "$brand, $color, $registrationNumber"
+    }
+}

@@ -1,3 +1,4 @@
+import Parking.showParking
 import data.Car
 import data.Command
 import data.Owner
@@ -14,9 +15,35 @@ object Manager {
                 Command.HELP.commandText -> printHelpMessage()
                 Command.END.commandText -> endProgram()
                 Command.PARK.commandText -> parkingCar()
+                Command.RETURN.commandText -> returnCarByOwner()
+                Command.SHOW_PARKING.commandText -> showParking()
+                Command.PARK_INFO_BY_CAR.commandText -> returnInfoByCarNumber()
+                Command.PARK_INFO_BY_PLACE.commandText -> returnInfoByPlace()
                 else -> printErrorMessage()
             }
         }
+    }
+
+    private fun returnInfoByPlace() {
+        println("Введите номер парковочного места")
+        val place = readln().trim('P').toIntOrNull()
+        if (place != null && place in 1..Parking.NUMBER_OF_PARKING_SPACE) {
+            Parking.infoByPlace(place - 1)
+        } else {
+            println("Парковочное место введено некорректно, команда отменена.")
+        }
+    }
+
+    private fun returnInfoByCarNumber() {
+        println("Введите номер автомобиля")
+        Parking.infoByCar(readln())
+    }
+
+    private fun returnCarByOwner() {
+        println("Введите имя и фамилию клиента")
+        val command = readln().split(" ")
+        val owner = Owner(command[0], command[1])
+        Parking.returnCar(owner)
     }
 
     private fun parkingCar() {
