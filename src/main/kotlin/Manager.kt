@@ -1,6 +1,10 @@
+import data.Car
 import data.Command
+import data.Owner
 
 object Manager {
+    private const val SIZE_FOR_CORRECT_PARKING = 5
+
     private var end = false
     fun getCommand() {
         while (!end) {
@@ -9,8 +13,22 @@ object Manager {
                 Command.START.commandText -> printHelloMessage()
                 Command.HELP.commandText -> printHelpMessage()
                 Command.END.commandText -> endProgram()
+                Command.PARK.commandText -> parkingCar()
                 else -> printErrorMessage()
             }
+        }
+    }
+
+    private fun parkingCar() {
+        println("Введите: марку, цвет, регистрационный номер автомобиля, имя и фамилю владельца")
+        val command = readln().split(" ")
+        if (command.size == SIZE_FOR_CORRECT_PARKING) {
+            val owner = Owner(command[3], command[4])
+            val car = Car(command[0], command[1], command[2], owner)
+            Parking.park(car)
+        } else {
+            println("Введены некорректные данные!\n" +
+                    "Команда отменена.")
         }
     }
 

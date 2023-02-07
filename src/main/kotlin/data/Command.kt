@@ -15,7 +15,8 @@ enum class Command(val commandText: String, val commandDescription: String) {
     ),
     PARK(
         "/park",
-        "Паркует автомобиль (находится в разработке)"
+        "Паркует автомобиль. " +
+                "   Введите марку, цвет, регистрационный номер автомобиля, имя и фамилю владельца"
     ),
     RETURN(
         "/return",
