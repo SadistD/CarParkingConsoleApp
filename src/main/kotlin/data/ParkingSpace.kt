@@ -1,14 +1,16 @@
 package data
 
 class ParkingSpace(val number: Int, car: Car? = null) {
-    var isEmpty = true
+
     var car = car
         set(value) {
-            isEmpty = car == null
+            isEmpty = value == null
             field = value
         }
 
+    var isEmpty = true
+
     override fun toString(): String {
-        return "P$number - $car"
+        return if(isEmpty)"P$number - FREE" else "P$number - $car"
     }
 }
