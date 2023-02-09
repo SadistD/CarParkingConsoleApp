@@ -19,9 +19,19 @@ object Manager {
                 Command.SHOW_PARKING.commandText -> showParking()
                 Command.PARK_INFO_BY_CAR.commandText -> returnInfoByCarNumber()
                 Command.PARK_INFO_BY_PLACE.commandText -> returnInfoByPlace()
+                Command.PARK_STATS.commandText -> returnParkingStats()
+                Command.PARK_ALL_STATS.commandText -> returnAllParkingStats()
                 else -> printErrorMessage()
             }
         }
+    }
+
+    private fun returnAllParkingStats() {
+        Parking.parkingAllStats()
+    }
+
+    private fun returnParkingStats() {
+        Parking.parkingStats()
     }
 
     private fun returnInfoByPlace() {
@@ -47,6 +57,10 @@ object Manager {
     }
 
     private fun parkingCar() {
+        if (!Parking.hasFreeSpace) {
+            println("Извините, паркока заполнена!")
+            return
+        }
         println("Введите: марку, цвет, регистрационный номер автомобиля, имя и фамилю владельца")
         val command = readln().split(" ")
         if (command.size == SIZE_FOR_CORRECT_PARKING) {
